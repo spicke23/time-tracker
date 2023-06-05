@@ -9,7 +9,7 @@ pipeline {
     tools {
         //Que herramientas queremos utilizar 
         maven "jenkinsmaven"
-        jdk "jenkinsjava"
+        jdk "javajenkins"
         
     }
 
@@ -32,16 +32,14 @@ pipeline {
         
         stage('Git Polling'){
             steps{
-                git branch: 'master', url: 'https://github.com/MiguelAngelRamos/time-tracker.git'
+                git branch: 'master', url: 'https://github.com/spicke23/time-tracker.git'
                 
             }
         }
         
         stage('BUILD CON MAVEN'){
             steps{
-               // bat "mvn clean package -DskipTests" 
-               
-               sh "mvn -Dmaven.test.failure.ignore=true clean package " //Unix
+               sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
             
             post{
@@ -55,11 +53,9 @@ pipeline {
         
         stage('test maven'){
             steps{
-                // bat "mvn test"
                 sh "mvn test"
             }
         }
-        
         
     }
     post{
